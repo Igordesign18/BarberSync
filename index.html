@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberSync - Sistema de Agendamento Online para Barbearias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #0a0a0a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #1a1a1a;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border-bottom: 2px solid #2a2a2a;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00ff00;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 32px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 3px solid #00ff00;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .hero h1 .highlight {
+            color: #00ff00;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            color: #0a0a0a;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.4);
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #00cc00 0%, #00ff00 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 255, 0, 0.6);
+        }
+
+        .subtitle {
+            text-align: center;
+            padding: 60px 20px 40px;
+            font-size: 28px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s;
+            border: 2px solid #2a2a2a;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff00;
+            box-shadow: 0 10px 40px rgba(0, 255, 0, 0.3);
+        }
+
+        .feature-image {
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .feature-content {
+            padding: 25px;
+            background: #1a1a1a;
+        }
+
+        .feature-content h3 {
+            color: #00ff00;
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-content h3 i {
+            font-size: 24px;
+        }
+
+        .feature-content p {
+            color: #b0b0b0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .testimonials {
+            background: #0a0a0a;
+            padding: 80px 20px;
+            border-top: 3px solid #00ff00;
+            border-bottom: 3px solid #00ff00;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 60px;
+        }
+
+        .testimonials h2 i {
+            color: #00ff00;
+            margin-right: 15px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-item {
+            text-align: center;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+        }
+
+        .testimonial-item:hover {
+            border-color: #00ff00;
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .testimonial-item img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #00ff00;
+        }
+
+        .management {
+            padding: 80px 20px;
+            text-align: center;
+            background: #0a0a0a;
+        }
+
+        .management h2 {
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .management h2 i {
+            color: #00ff00;
+            margin-right: 15px;
+        }
+
+        .management-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            border: 3px solid #00ff00;
+            box-shadow: 0 10px 40px rgba(0, 255, 0, 0.3);
+        }
+
+        .management-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .management-feature {
+            text-align: center;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+        }
+
+        .management-feature:hover {
+            border-color: #00ff00;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: #0a0a0a;
+            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.4);
+        }
+
+        .management-feature h3 {
+            color: #00ff00;
+            margin-bottom: 15px;
+        }
+
+        .management-feature p {
+            color: #b0b0b0;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 3px solid #00ff00;
+            border-bottom: 3px solid #00ff00;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .cta-section h2 i {
+            color: #00ff00;
+            margin-right: 15px;
+        }
+
+        .support-section {
+            padding: 80px 20px;
+            background: #0a0a0a;
+        }
+
+        .support-section h2 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 60px;
+        }
+
+        .support-section h2 i {
+            color: #00ff00;
+            margin-right: 15px;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .support-item {
+            text-align: center;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+        }
+
+        .support-item:hover {
+            border-color: #00ff00;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .support-item h3 {
+            color: #00ff00;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .support-item p {
+            color: #b0b0b0;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 3px solid #00ff00;
+        }
+
+        footer p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+
+        footer .logo {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-content {
+                flex-direction: column;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-sync-alt"></i>
+                <span>BarberSync</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>A plataforma de<br>agendamento <span class="highlight">digital</span><br>que revoluciona e<br>impulsiona o sucesso<br>da sua <span class="highlight">barbearia</span></h1>
+                <a href="#" class="cta-button"><i class="fas fa-rocket"></i> Experimente Grátis Agora</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&h=600&fit=crop" alt="Barbeiro profissional">
+            </div>
+        </div>
+    </section>
+
+    <section class="subtitle">
+        <h2>Seu negócio bem estruturado, rentável e totalmente sob seu comando!</h2>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop" alt="Lista de agendamentos">
+            </div>
+            <div class="feature-content">
+                <h3><i class="fas fa-calendar-check"></i> Painel de Agendamentos</h3>
+                <p>Tenha uma visão completa de todos os compromissos do dia. Controle horários, clientes e procedimentos de maneira centralizada e eficiente.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop" alt="Gestão de horários">
+            </div>
+            <div class="feature-content">
+                <h3><i class="fas fa-clock"></i> Controle de Disponibilidade</h3>
+                <p>Defina seus períodos de atendimento, reserve datas especiais e administre sua disponibilidade com total automação e praticidade.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=300&fit=crop" alt="Cadastro de serviços">
+            </div>
+            <div class="feature-content">
+                <h3><i class="fas fa-list-ul"></i> Gerenciamento de Serviços</h3>
+                <p>Registre todos os atendimentos da sua barbearia incluindo valores, tempo de execução e informações detalhadas de cada procedimento.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="Histórico">
+            </div>
+            <div class="feature-content">
+                <h3><i class="fas fa-history"></i> Registro Completo de Clientes</h3>
+                <p>Consulte todo o histórico de visitas, monitore a fidelidade dos clientes e fortaleça o relacionamento com sua base de consumidores.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop" alt="Sistema confiável">
+            </div>
+            <div class="feature-content">
+                <h3><i class="fas fa-shield-alt"></i> Plataforma Segura</h3>
+                <p>Tecnologia de ponta com proteção avançada, armazenamento automático em nuvem e funcionamento ininterrupto 24 horas por dia.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" alt="Estatísticas">
+            </div>
+            <div class="feature-content">
+                <h3><i class="fas fa-chart-line"></i> Métricas por Profissional</h3>
+                <p>Monitore a performance de cada barbeiro, volume de atendimentos realizados e receita gerada individualmente por membro da equipe.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2><i class="fas fa-star"></i> Descubra como a BarberSync revolucionou estabelecimentos pelo Brasil</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-item">
+                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=300&h=400&fit=crop" alt="Interface mobile">
+                <p><strong>Simplicidade nas operações diárias</strong></p>
+            </div>
+            <div class="testimonial-item">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=300&h=400&fit=crop" alt="Organização">
+                <p><strong>Estrutura e gestão profissional</strong></p>
+            </div>
+            <div class="testimonial-item">
+                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=300&h=400&fit=crop" alt="Crescimento">
+                <p><strong>Expansão da clientela e lucratividade</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="management">
+        <h2><i class="fas fa-chart-pie"></i> Administração simples e sem complicações</h2>
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&h=600&fit=crop" alt="Dashboard de gestão" class="management-image">
+        
+        <div class="management-features">
+            <div class="management-feature">
+                <div class="icon-circle"><i class="fas fa-file-invoice-dollar"></i></div>
+                <h3>Análises Detalhadas</h3>
+                <p>Acesse relatórios completos sobre receitas, marcações de horários e rendimento geral do estabelecimento.</p>
+            </div>
+            <div class="management-feature">
+                <div class="icon-circle"><i class="fas fa-wallet"></i></div>
+                <h3>Gestão do Caixa</h3>
+                <p>Administre entradas, saídas e mantenha domínio completo sobre todo o fluxo financeiro do seu empreendimento.</p>
+            </div>
+            <div class="management-feature">
+                <div class="icon-circle"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Disponível em Dispositivos Móveis</h3>
+                <p>Gerencie seu negócio de qualquer localização usando seu celular ou tablet com total mobilidade.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2><i class="fas fa-rocket"></i> Eleve sua barbearia a um novo patamar agora!</h2>
+        <a href="#" class="cta-button"><i class="fas fa-arrow-right"></i> Iniciar Teste Gratuito</a>
+    </section>
+
+    <section class="support-section">
+        <h2><i class="fas fa-headset"></i> Assistência profissional sempre disponível</h2>
+        <div class="support-grid">
+            <div class="support-item">
+                <div class="icon-circle"><i class="fas fa-comments"></i></div>
+                <h3>Atendimento Instantâneo</h3>
+                <p>Solução imediata por chat online</p>
+            </div>
+            <div class="support-item">
+                <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+                <h3>Contato por E-mail</h3>
+                <p>Retorno garantido em até 24h</p>
+            </div>
+            <div class="support-item">
+                <div class="icon-circle"><i class="fas fa-book"></i></div>
+                <h3>Central de Ajuda</h3>
+                <p>Material didático e guias práticos</p>
+            </div>
+            <div class="support-item">
+                <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Capacitação Completa</h3>
+                <p>Preparação total do seu time</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-sync-alt"></i>
+                <span>BarberSync</span>
+            </div>
+            <p>Solução completa de agendamento digital para barbearias modernas</p>
+            <p>© 2025 BarberSync. Todos os direitos reservados.</p>
+            <p style="margin-top: 20px;"><i class="fas fa-envelope"></i> suporte@barbersync.com | <i class="fas fa-phone"></i> (85) 9999-8888</p>
+        </div>
+    </footer>
+</body>
+</html>
