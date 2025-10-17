@@ -671,6 +671,7 @@
             .hero-text {
                 padding-right: 0;
                 margin-bottom: 40px;
+                text-align: center;
             }
 
             /* Fixed carousel display on mobile with proper height and visibility */
@@ -953,12 +954,24 @@
         let currentImageIndex = 0;
         const images = document.querySelectorAll('.carousel-image');
         const totalImages = images.length;
+
+        console.log('[v0] Carousel initialized');
+        console.log('[v0] Total images:', totalImages);
+        console.log('[v0] Images found:', images);
+
         function showNextImage() {
+            console.log('[v0] Changing from image', currentImageIndex);
             images[currentImageIndex].classList.remove('active');
             currentImageIndex = (currentImageIndex + 1) % totalImages;
             images[currentImageIndex].classList.add('active');
+            console.log('[v0] Changed to image', currentImageIndex);
         }
+
+        // Change image every 3 seconds
         setInterval(showNextImage, 3000);
+        console.log('[v0] Carousel interval started');
+        // </CHANGE>
+
         let timeLeft = 10 * 60;
         function updateCountdown() {
             const minutes = Math.floor(timeLeft / 60);
