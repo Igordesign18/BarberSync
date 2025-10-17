@@ -158,8 +158,55 @@
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
-            border: 3px solid #89CFF0;
-            box-shadow: 0 0 30px rgba(137, 207, 240, 0.3);
+            border: 3px solid #87CEFA;
+            box-shadow: 0 0 30px rgba(135, 206, 250, 0.3);
+        }
+        .mobile-gallery {
+            display: none;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            margin-top: 30px;
+        }
+
+        .mobile-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-gallery-container {
+            display: flex;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .mobile-gallery-item {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+        }
+
+        .mobile-gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid #87CEFA;
+            box-shadow: 0 5px 20px rgba(135, 206, 250, 0.4);
+        }
+
+        .gallery-hint {
+            text-align: center;
+            color: #87CEFA;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .gallery-hint i {
+            margin-right: 8px;
+            animation: bounce 2s infinite;
         }
         .pricing-section {
             background: linear-gradient(135deg, #0a0a0a 0%, #001a33 50%, #0a0a0a 100%);
@@ -676,37 +723,15 @@
 
             /* Fixed carousel display on mobile with proper height and visibility */
             .hero-image {
-                height: 400px !important;
-                min-height: 400px;
-                width: 100%;
-                display: block;
-                position: relative;
-                overflow: hidden;
+                display: none;
             }
 
-            .carousel-container {
+            .mobile-gallery {
                 display: block;
-                width: 100%;
-                height: 100%;
-                position: relative;
             }
 
-            .carousel-image {
+            .gallery-hint {
                 display: block;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-
-            .carousel-image img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 10px;
-                border: 3px solid #87CEFA;
             }
             /* </CHANGE> */
 
@@ -753,6 +778,31 @@
             <div class="hero-text">
                 <h1>A plataforma de<br>agendamento <span class="highlight">digital</span><br>que revoluciona e<br>impulsiona o sucesso<br>da sua <span class="highlight">barbearia</span></h1>
                 <a href="#pricing" class="cta-button"><i class="fas fa-rocket"></i> Experimente Grátis Agora</a>
+                
+                <!-- Added mobile swipeable gallery below CTA button -->
+                <div class="mobile-gallery">
+                    <div class="mobile-gallery-container">
+                        <div class="mobile-gallery-item">
+                            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&h=600&fit=crop" alt="Barbeiro profissional 1">
+                        </div>
+                        <div class="mobile-gallery-item">
+                            <img src="https://i.ibb.co/5xJxsYqq/1.png" alt="Barbeiro profissional 2">
+                        </div>
+                        <div class="mobile-gallery-item">
+                            <img src="https://i.ibb.co/6RdtZG44/2.png" alt="Barbeiro profissional 3">
+                        </div>
+                        <div class="mobile-gallery-item">
+                            <img src="https://i.ibb.co/DgQ15Py8/4.png" alt="Barbeiro profissional 4">
+                        </div>
+                        <div class="mobile-gallery-item">
+                            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500&h=600&fit=crop" alt="Barbeiro profissional 5">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-hint">
+                    <i class="fas fa-hand-pointer"></i> Arraste para ver mais fotos
+                </div>
+                <!-- </CHANGE> -->
             </div>
             <div class="hero-image">
                 <div class="carousel-container">
