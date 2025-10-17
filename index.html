@@ -675,29 +675,37 @@
 
             /* Fixed carousel display on mobile with proper height and visibility */
             .hero-image {
-                height: 400px;
+                height: 400px !important;
                 min-height: 400px;
                 width: 100%;
                 display: block;
+                position: relative;
+                overflow: hidden;
             }
 
             .carousel-container {
-                height: 100%;
-                width: 100%;
                 display: block;
+                width: 100%;
+                height: 100%;
+                position: relative;
             }
 
             .carousel-image {
                 display: block;
-                height: 100%;
                 width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
             }
 
             .carousel-image img {
+                display: block;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                display: block;
+                border-radius: 10px;
+                border: 3px solid #87CEFA;
             }
             /* </CHANGE> */
 
@@ -846,7 +854,7 @@
         <div class="feature-card animate-on-scroll">
             <div class="ai-badge"><i class="fas fa-shield-check"></i> Proteção IA</div>
             <div class="feature-image">
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop" alt="Sistema confiável">
+                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=300&h=400&fit=crop" alt="Sistema confiável">
             </div>
             <div class="feature-content">
                 <h3><i class="fas fa-shield-alt"></i> Plataforma Segura com IA</h3>
